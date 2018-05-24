@@ -4,9 +4,6 @@
 
 FROM alpine:3.7
 
-ENV DUMB_INIT_VERSION=1.2.0
-ENV SU_EXEC_VERSION=0.2
-
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Do not split this into multiple RUN!
@@ -17,8 +14,6 @@ RUN apk update \
  && apk add --no-cache \
         ca-certificates \
         ruby ruby-irb \
-        su-exec==${SU_EXEC_VERSION}-r0 \
-        dumb-init==${DUMB_INIT_VERSION}-r0 \
  && apk add --no-cache --virtual .build-deps \
         build-base sudo\
         ruby-dev wget gnupg \
@@ -45,7 +40,6 @@ ENV FLUENTD_OPT=""
 ENV FLUENTD_CONF="fluent.conf"
 
 ENV LD_PRELOAD=""
-ENV DUMB_INIT_SETSID 0
 
 EXPOSE 24224 5140
 
